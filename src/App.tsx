@@ -1,25 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Layout, Typography } from "antd";
+import { Link, Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import HomePage from "./pages/Home/ index";
+import AboutPage from "./pages/About";
+
+const { Header, Content } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header
+        style={{
+          height: "8vh",
+          boxShadow: "0px 2px 5px rgba(244, 244, 244, 0.3)",
+          position: "relative",
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography.Title style={{ margin: 0 }}>
+          Stock Comparator
+        </Typography.Title>
+        <div>
+          <Link
+            to="/"
+            style={{
+              margin: "0 10px",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            style={{
+              margin: "0 10px",
+              textDecoration: "none",
+            }}
+          >
+            About
+          </Link>
+        </div>
+      </Header>
+      <Content
+        style={{ backgroundColor: "#001529", height: "92vh", width: "100vw" }}
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </Content>
+    </Router>
   );
 }
 
