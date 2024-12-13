@@ -2,9 +2,9 @@ import { Space, Typography } from "antd";
 
 const AboutPage: React.FC = () => {
   return (
-    <Space>
+    <Space style={{ height: "100%", width: "100%", justifyContent: "center" }}>
       <Typography.Paragraph style={{ margin: "20px" }}>
-        Página sobre em construção...
+        Página About em construção...
       </Typography.Paragraph>
     </Space>
   );

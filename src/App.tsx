@@ -9,19 +9,21 @@ const { Header, Content } = Layout;
 function App() {
   return (
     <Router>
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
       <Header
         style={{
           height: "8vh",
-          boxShadow: "0px 2px 5px rgba(244, 244, 244, 0.3)",
+          // boxShadow: "0px 2px 5px rgba(244, 244, 244, 0.3)",
           position: "relative",
           alignItems: "center",
           display: "flex",
           justifyContent: "space-between",
+          backgroundColor: "transparent",
         }}
       >
-        <Typography.Title style={{ margin: 0 }}>
-          Stock Comparator
-        </Typography.Title>
+        <Typography.Title style={{ margin: 0 }}>Weather Radar</Typography.Title>
         <div>
           <Link
             to="/"
@@ -44,7 +46,11 @@ function App() {
         </div>
       </Header>
       <Content
-        style={{ backgroundColor: "#001529", height: "92vh", width: "100vw" }}
+        style={{
+          backgroundColor: "transparent",
+          height: "92vh",
+          width: "100vw",
+        }}
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
