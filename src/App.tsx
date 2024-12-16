@@ -15,7 +15,6 @@ function App() {
       <Header
         style={{
           height: "8vh",
-          // boxShadow: "0px 2px 5px rgba(244, 244, 244, 0.3)",
           position: "relative",
           alignItems: "center",
           display: "flex",
