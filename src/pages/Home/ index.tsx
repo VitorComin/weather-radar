@@ -2,15 +2,36 @@ import React, { useState, useEffect } from "react";
 import { Space, Select, Typography, Col, Row } from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
-import { CloudIcon } from "../../assets/icons/Icons";
+import {
+  CloudIcon,
+  MistIcon,
+  RainIcon,
+  SnowIcon,
+  SunIcon,
+  ThunderstormIcon,
+} from "../../assets/icons/Icons";
+import { IOpenWeatherResponse } from "../../types/types";
 
 const { Option } = Select;
 
 const HomePage: React.FC = () => {
-  const [cityOptions, setCityOptions] = useState<any[]>([]);
-  const [selectedCity, setSelectedCity] = useState<any>(undefined);
+  const [cityOptions, setCityOptions] = useState<IOpenWeatherResponse[]>([]);
+  const [selectedCity, setSelectedCity] = useState<IOpenWeatherResponse>(
+    {} as IOpenWeatherResponse
+  );
   const [visibleContent, setVisibleContent] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const RenderIcon = ({ id }: { id: number }) => {
+    if (id >= 200 && id <= 232) return <ThunderstormIcon />;
+    if (id >= 300 && id <= 321) return <RainIcon />;
+    if (id >= 500 && id <= 531) return <RainIcon />;
+    if (id >= 600 && id <= 622) return <SnowIcon />;
+    if (id === 800) return <SunIcon />;
+    if (id >= 801 && id <= 804) return <CloudIcon />;
+    if (id >= 701 && id <= 781) return <MistIcon />;
+    return <CloudIcon />;
+  };
 
   useEffect(() => {
     setTimeout(() => setVisibleContent("visible"), 0);
@@ -40,14 +61,17 @@ const HomePage: React.FC = () => {
   function onSelectCity(cityId: number) {
     setVisibleContent(undefined);
     setTimeout(
-      () => setSelectedCity(cityOptions.find((city) => city.id === cityId)),
+      () =>
+        setSelectedCity(
+          cityOptions.find((city) => city.id === cityId) ||
+            ({} as IOpenWeatherResponse)
+        ),
       1500
     );
   }
-  console.log(selectedCity);
   return (
     <Space className={`home-page-container ${visibleContent}`}>
-      {selectedCity ? (
+      {selectedCity && Object.keys(selectedCity)?.length > 0 ? (
         <>
           <div
             style={{
@@ -57,25 +81,18 @@ const HomePage: React.FC = () => {
               alignItems: "center",
               display: "flex",
               flexDirection: "column",
+              marginTop: "-8vh",
             }}
           >
-            <CloudIcon />
-            {/* <Typography.Title level={5}>
-              <img
-                src={`http://openweathermap.org/img/${
-                  selectedCity?.weather[0]?.icon || "wn"
-                }/01d.png`}
-                alt="Clima"
-              />
-            </Typography.Title> */}
+            <RenderIcon id={selectedCity?.weather[0]?.id} />
+
             <Typography.Title level={4}>
               Clima: {selectedCity?.weather[0]?.main}
             </Typography.Title>
+
             <Typography.Title level={4}>
               Descrição do Clima: {selectedCity?.weather[0]?.description}
             </Typography.Title>
-            <Typography.Title></Typography.Title>
-            <Typography.Title></Typography.Title>
           </div>
           <div
             style={{
@@ -83,13 +100,13 @@ const HomePage: React.FC = () => {
               height: "100%",
               display: "flex",
               flexDirection: "column",
+              justifyContent: "center",
+              marginTop: "-8vh",
             }}
           >
             <Row
               style={{
                 alignItems: "center",
-                display: "flex",
-                justifyContent: "center",
                 marginTop: 50,
               }}
             >
