@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Space, Select, Typography, Col, Row } from "antd";
+import { Space, Select, Typography, Col, Row, Button } from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
 import {
+  ArrowBackIcon,
   CloudIcon,
   MistIcon,
   RainIcon,
@@ -47,7 +48,7 @@ const HomePage: React.FC = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://api.openweathermap.org/data/2.5/find?q=${value}&units=metric&appid=b6432528466c2ddd5717e9a9ae56b0f9`
+        `http://api.openweathermap.org/data/2.5/find?q=${value}&units=metric&appid=b6432528466c2ddd5717e9a9ae56b0f9&lang=pt`
       );
 
       setCityOptions(data.list);
@@ -72,96 +73,102 @@ const HomePage: React.FC = () => {
   return (
     <Space className={`home-page-container ${visibleContent}`}>
       {selectedCity && Object.keys(selectedCity)?.length > 0 ? (
-        <>
-          <div
+        <div className={"home-page-informations-container"}>
+          <Button
             style={{
-              width: "50%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              display: "flex",
-              flexDirection: "column",
-              marginTop: "-8vh",
+              background: "transparent",
+              width: "fit-content",
+              color: "#FFF",
+              position: "absolute",
+              left: 25,
+              top: "9vh",
+              border: "none",
+              fontSize: 18,
             }}
           >
+            <ArrowBackIcon /> Voltar
+          </Button>
+          <div className="home-information-section">
             <RenderIcon id={selectedCity?.weather[0]?.id} />
 
-            <Typography.Title level={4}>
-              Clima: {selectedCity?.weather[0]?.main}
-            </Typography.Title>
+            <Typography.Text>
+              <strong>Clima:</strong> {selectedCity?.weather[0]?.main}
+            </Typography.Text>
 
-            <Typography.Title level={4}>
-              Descrição do Clima: {selectedCity?.weather[0]?.description}
-            </Typography.Title>
+            <Typography.Text>
+              <strong>Descrição do Clima:</strong>{" "}
+              {selectedCity?.weather[0]?.description
+                ? selectedCity.weather[0].description.charAt(0).toUpperCase() +
+                  selectedCity.weather[0].description.slice(1)
+                : ""}
+            </Typography.Text>
           </div>
-          <div
-            style={{
-              width: "50%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              marginTop: "-8vh",
-            }}
-          >
+          <div className="home-information-section">
             <Row
               style={{
                 alignItems: "center",
                 marginTop: 50,
               }}
             >
+              <img
+                src={`https://flagcdn.com/w80/${
+                  selectedCity?.sys?.country.toLowerCase() || "br"
+                }.png`}
+                alt="Bandeira do País"
+                style={{ marginRight: 20 }}
+              />
               <Typography.Title
                 style={{ justifyContent: "center", display: "flex" }}
                 level={1}
               >
-                <img
-                  src={`https://flagcdn.com/w80/${
-                    selectedCity?.sys?.country.toLowerCase() || "br"
-                  }.png`}
-                  alt="Bandeira do Brasil"
-                  style={{ marginRight: 20 }}
-                />
                 {selectedCity?.name} - {selectedCity?.sys?.country}
               </Typography.Title>
             </Row>
             <Row style={{ marginTop: 50 }}>
-              <Col span={12}>
-                <Typography.Title level={5}>
-                  Temperatura: {selectedCity?.main?.temp}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Sensação Térmica: {selectedCity?.main?.feels_like}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Temperatura Mínima: {selectedCity?.main?.temp_min}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Temperatura Máxima: {selectedCity?.main?.temp_max}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Pressão Atmosférica: {selectedCity?.main?.pressure}
-                </Typography.Title>
+              <Col sm={24} md={12}>
+                <Typography.Text>
+                  <strong>Temperatura:</strong> {selectedCity?.main?.temp}°C
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Sensação Térmica:</strong>{" "}
+                  {selectedCity?.main?.feels_like}°C
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Temperatura Mínima:</strong>{" "}
+                  {selectedCity?.main?.temp_min}°C
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Temperatura Máxima:</strong>{" "}
+                  {selectedCity?.main?.temp_max}°C
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Pressão Atmosférica:</strong>{" "}
+                  {selectedCity?.main?.pressure} hPa
+                </Typography.Text>
               </Col>
               <Col span={12}>
-                <Typography.Title level={5}>
-                  Umidade: {selectedCity?.main?.humidity}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Velocidade do Vento: {selectedCity?.wind?.speed}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Direção do Vento: {selectedCity?.wind?.deg}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Porcentagem coberta por nuvens: {selectedCity?.clouds?.all}
-                </Typography.Title>
-                <Typography.Title level={5}>
-                  Atualizado em: {selectedCity?.dt}
-                </Typography.Title>
+                <Typography.Text>
+                  <strong>Umidade:</strong> {selectedCity?.main?.humidity}%
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Velocidade do Vento:</strong>{" "}
+                  {selectedCity?.wind?.speed} m/s
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Direção do Vento:</strong> {selectedCity?.wind?.deg}°
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Porcentagem coberta por nuvens:</strong>{" "}
+                  {selectedCity?.clouds?.all}%
+                </Typography.Text>
+                <Typography.Text>
+                  <strong>Atualizado em:</strong>{" "}
+                  {new Date(selectedCity?.dt * 1000).toLocaleString("pt-BR")}
+                </Typography.Text>
               </Col>
             </Row>
           </div>
-        </>
+        </div>
       ) : (
         <Select
           size={"large"}

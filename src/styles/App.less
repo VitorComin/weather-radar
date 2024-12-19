@@ -6,13 +6,32 @@
 
 html {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-  overflow: hidden;
   position: fixed;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   font-family: "Lato", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #464646;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
 }
 
 .ant-typography-title,
@@ -24,4 +43,28 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+span.ant-typography {
+  font-size: 18px !important;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+a {
+  font-size: 18px !important;
+}
+
+@media (max-width: 800px) {
+  .ant-layout-header {
+    padding: 0 25px !important;
+  }
+
+  h1 {
+    font-size: 21px !important;
+  }
+
+  a {
+    font-size: 15px !important;
+  }
 }

@@ -30,3 +30,51 @@
 .home-page-container.visible {
   opacity: 1;
 }
+
+.home-page-informations-container {
+  overflow: auto;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  min-height: 100%;
+}
+
+.home-information-section {
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: -8vh;
+}
+
+.ant-col {
+  margin: 0 3%;
+}
+
+@media (max-width: 999px) {
+  .ant-space {
+    display: block !important;
+  }
+
+  .ant-space-item {
+    flex-direction: column !important;
+  }
+
+  .home-information-section {
+    width: 100%;
+    height: fit-content;
+    padding: 12% 0 3%;
+  }
+
+  .home-page-informations-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 800px) {
+  .city-select {
+    width: 50%;
+  }
+}
