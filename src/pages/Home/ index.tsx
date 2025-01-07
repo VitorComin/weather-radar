@@ -2,16 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Space, Select, Typography, Col, Row, Button } from "antd";
 import { debounce } from "lodash";
 import axios from "axios";
-import {
-  ArrowBackIcon,
-  CloudIcon,
-  MistIcon,
-  RainIcon,
-  SnowIcon,
-  SunIcon,
-  ThunderstormIcon,
-} from "../../assets/icons/Icons";
+import { ArrowBackIcon, ThunderstormIcon } from "../../assets/icons/Icons";
 import { IOpenWeatherResponse } from "../../types/types";
+import ReactAnimatedWeather from "react-animated-weather";
 
 const { Option } = Select;
 
@@ -24,15 +17,43 @@ const HomePage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const RenderIcon = ({ id }: { id: number }) => {
-    if (id >= 200 && id <= 232) return <ThunderstormIcon />;
-    if (id >= 300 && id <= 321) return <RainIcon />;
-    if (id >= 500 && id <= 531) return <RainIcon />;
-    if (id >= 600 && id <= 622) return <SnowIcon />;
-    if (id === 800) return <SunIcon />;
-    if (id >= 801 && id <= 804) return <CloudIcon />;
-    if (id >= 701 && id <= 781) return <MistIcon />;
-    return <CloudIcon />;
+    if (id >= 200 && id <= 232) {
+      return <ThunderstormIcon />;
+    } else {
+      return (
+        <ReactAnimatedWeather
+          icon={getWeatherIcon(id)}
+          color={getWeatherIconColor(id)}
+          size={128}
+          animate={true}
+        />
+      );
+    }
   };
+
+  function getWeatherIcon(id: number) {
+    if (id >= 200 && id <= 232) return "RAIN";
+    if (id >= 300 && id <= 321) return "RAIN";
+    if (id >= 500 && id <= 531) return "RAIN";
+    if (id >= 600 && id <= 622) return "SNOW";
+    if (id === 800) return "CLEAR_DAY";
+    if (id === 801) return "PARTLY_CLOUDY_DAY";
+    if (id >= 802 && id <= 804) return "CLOUDY";
+    if (id >= 701 && id <= 781) return "FOG";
+    return "CLOUDY";
+  }
+
+  function getWeatherIconColor(id: number) {
+    if (id >= 200 && id <= 232) return "blue";
+    if (id >= 300 && id <= 321) return "blue";
+    if (id >= 500 && id <= 531) return "blue";
+    if (id >= 600 && id <= 622) return "white";
+    if (id === 800) return "goldenrod";
+    if (id === 801) return "white";
+    if (id >= 802 && id <= 804) return "white";
+    if (id >= 701 && id <= 781) return "gray";
+    return "white";
+  }
 
   useEffect(() => {
     setTimeout(() => setVisibleContent("visible"), 0);
@@ -61,6 +82,16 @@ const HomePage: React.FC = () => {
 
   function onSelectCity(cityId: number) {
     setVisibleContent(undefined);
+    const stars = document.getElementById("stars");
+    const stars2 = document.getElementById("stars2");
+    const stars3 = document.getElementById("stars3");
+
+    if (stars) stars.style.opacity = "0";
+    if (stars2) stars2.style.opacity = "0";
+    if (stars3) stars3.style.opacity = "0";
+
+    document.documentElement.classList.add("daytime");
+
     setTimeout(
       () =>
         setSelectedCity(
@@ -70,11 +101,29 @@ const HomePage: React.FC = () => {
       1500
     );
   }
+
+  function goBack() {
+    setVisibleContent(undefined);
+    const stars = document.getElementById("stars");
+    const stars2 = document.getElementById("stars2");
+    const stars3 = document.getElementById("stars3");
+
+    if (stars) stars.style.opacity = "1";
+    if (stars2) stars2.style.opacity = "1";
+    if (stars3) stars3.style.opacity = "1";
+
+    document.documentElement.classList.remove("daytime");
+
+    setTimeout(() => setSelectedCity({} as IOpenWeatherResponse), 1500);
+    setSelectedCity({} as IOpenWeatherResponse);
+  }
+
   return (
     <Space className={`home-page-container ${visibleContent}`}>
       {selectedCity && Object.keys(selectedCity)?.length > 0 ? (
         <div className={"home-page-informations-container"}>
           <Button
+            onClick={goBack}
             style={{
               background: "transparent",
               width: "fit-content",

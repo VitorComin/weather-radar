@@ -5,9 +5,16 @@
 @text-color: #faf9f6;
 
 html {
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  background-color: #1b2735;
   position: fixed;
   scroll-behavior: smooth;
+  transition: background-color 1.5s ease, box-shadow 1.5s ease;
+  box-shadow: inset 0 0 600px 150px rgba(16, 27, 43, 1);
+}
+
+html.daytime {
+  box-shadow: inset 0 0 600px 150px rgba(162, 194, 232, 1);
+  background-color: #64aaff;
 }
 
 body {
