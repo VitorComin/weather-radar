@@ -1,61 +1,14 @@
-import React from "react";
-import { Layout, Typography } from "antd";
-import { Link, Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import HomePage from "./pages/Home/ index";
-import AboutPage from "./pages/About";
-
-const { Header, Content } = Layout;
+import { BrowserRouter as Router } from "react-router-dom";
+import LayoutHeader from "./components/LayoutHeader";
+import LayoutContent from "./components/LayoutContent";
+import BackgroundStars from "./components/BackgroundStars";
 
 function App() {
   return (
     <Router>
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-      <Header
-        style={{
-          height: "8vh",
-          position: "relative",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "space-between",
-          backgroundColor: "transparent",
-        }}
-      >
-        <Typography.Title style={{ margin: 0 }}>Weather Radar</Typography.Title>
-        <div>
-          <Link
-            to="/"
-            style={{
-              margin: "0 10px",
-              textDecoration: "none",
-            }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            style={{
-              margin: "0 10px",
-              textDecoration: "none",
-            }}
-          >
-            About
-          </Link>
-        </div>
-      </Header>
-      <Content
-        style={{
-          backgroundColor: "transparent",
-          height: "92vh",
-          width: "100vw",
-        }}
-      >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
-      </Content>
+      <BackgroundStars />
+      <LayoutHeader />
+      <LayoutContent />
     </Router>
   );
 }
