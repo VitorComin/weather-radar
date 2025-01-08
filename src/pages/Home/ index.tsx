@@ -5,6 +5,7 @@ import axios from "axios";
 import { ArrowBackIcon, ThunderstormIcon } from "../../assets/icons/Icons";
 import { IOpenWeatherResponse } from "../../types/types";
 import ReactAnimatedWeather from "react-animated-weather";
+import { resetPageStyle } from "../../utils/resetPageLayout";
 
 const { Option } = Select;
 
@@ -104,15 +105,7 @@ const HomePage: React.FC = () => {
 
   function goBack() {
     setVisibleContent(undefined);
-    const stars = document.getElementById("stars");
-    const stars2 = document.getElementById("stars2");
-    const stars3 = document.getElementById("stars3");
-
-    if (stars) stars.style.opacity = "1";
-    if (stars2) stars2.style.opacity = "1";
-    if (stars3) stars3.style.opacity = "1";
-
-    document.documentElement.classList.remove("daytime");
+    resetPageStyle();
 
     setTimeout(() => setSelectedCity({} as IOpenWeatherResponse), 1500);
     setSelectedCity({} as IOpenWeatherResponse);
@@ -122,19 +115,7 @@ const HomePage: React.FC = () => {
     <Space className={`home-page-container ${visibleContent}`}>
       {selectedCity && Object.keys(selectedCity)?.length > 0 ? (
         <div className={"home-page-informations-container"}>
-          <Button
-            onClick={goBack}
-            style={{
-              background: "transparent",
-              width: "fit-content",
-              color: "#FFF",
-              position: "absolute",
-              left: 25,
-              top: "9vh",
-              border: "none",
-              fontSize: 18,
-            }}
-          >
+          <Button className="go-back-button" onClick={goBack}>
             <ArrowBackIcon /> Voltar
           </Button>
           <div className="home-information-section">
@@ -153,12 +134,7 @@ const HomePage: React.FC = () => {
             </Typography.Text>
           </div>
           <div className="home-information-section">
-            <Row
-              style={{
-                alignItems: "center",
-                marginTop: 50,
-              }}
-            >
+            <Row className="city-title-container">
               <img
                 src={`https://flagcdn.com/w80/${
                   selectedCity?.sys?.country.toLowerCase() || "br"
@@ -173,7 +149,7 @@ const HomePage: React.FC = () => {
                 {selectedCity?.name} - {selectedCity?.sys?.country}
               </Typography.Title>
             </Row>
-            <Row style={{ marginTop: 50 }}>
+            <Row className={"weather-informations-container"}>
               <Col sm={24} md={12}>
                 <Typography.Text>
                   <strong>Temperatura:</strong> {selectedCity?.main?.temp}°C
@@ -195,7 +171,7 @@ const HomePage: React.FC = () => {
                   {selectedCity?.main?.pressure} hPa
                 </Typography.Text>
               </Col>
-              <Col span={12}>
+              <Col sm={24} md={12}>
                 <Typography.Text>
                   <strong>Umidade:</strong> {selectedCity?.main?.humidity}%
                 </Typography.Text>

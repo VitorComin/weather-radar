@@ -53,6 +53,30 @@
   margin: 0 3%;
 }
 
+.go-back-button {
+  background: transparent;
+  width: fit-content;
+  color: #fff;
+  position: absolute;
+  left: 25px;
+  top: 9vh;
+  border: none;
+  font-size: 18;
+}
+
+.weather-informations-container {
+  margin-top: 50px;
+  flex-flow: row;
+  justify-content: center;
+  width: 85%;
+}
+
+.city-title-container {
+  align-items: center;
+  margin-top: 50px;
+  width: 90%;
+}
+
 @media (max-width: 999px) {
   .ant-space {
     display: block !important;
@@ -65,11 +89,23 @@
   .home-information-section {
     width: 100%;
     height: fit-content;
-    padding: 12% 0 3%;
+    padding: 18% 0 3%;
   }
 
   .home-page-informations-container {
     flex-direction: column;
+  }
+
+  .weather-informations-container {
+    flex-flow: row wrap;
+
+    .ant-col {
+      justify-content: center;
+    }
+  }
+
+  .city-title-container {
+    justify-content: center;
   }
 }
 

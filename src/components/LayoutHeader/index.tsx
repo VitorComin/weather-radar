@@ -1,5 +1,6 @@
 import { Layout, Typography } from "antd";
 import { Link } from "react-router-dom";
+import { resetPageStyle } from "../../utils/resetPageLayout";
 
 const { Header } = Layout;
 
@@ -18,6 +19,7 @@ const LayoutHeader: React.FC = () => {
           Home
         </Link>
         <Link
+          onClick={resetPageStyle}
           to="/about"
           style={{
             margin: "0 10px",
