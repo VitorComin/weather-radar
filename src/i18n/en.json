@@ -1,0 +1,22 @@
+{
+  "home": "Home",
+  "about": "About",
+  "city_request_error": "Error on requesting cities:",
+  "back": "Back",
+  "weather": "Weather:",
+  "weather_description": "Weather Description:",
+  "country_flag": "Country Flag",
+  "temperature": "Temperature:",
+  "feels_like": "Feels Like:",
+  "minimum_temperature": "Minimum Temperature:",
+  "maximum_temperature": "Maximum Temperature:",
+  "atmospheric_pressure": "Atmospheric Pressure:",
+  "humidity": "Humidity:",
+  "wind_speed": "Wind Speed:",
+  "wind_direction": "Wind Direction:",
+  "cloud_coverage_percentage": "Cloud Coverage Percentage:",
+  "updated_at": "Updated at:",
+  "no_options": "No options",
+  "search_a_city": "Search a city",
+  "use_selected_city_error": "useSelectedCity must be used within a SelectedCityProvider"
+}

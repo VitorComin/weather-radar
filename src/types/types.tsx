@@ -48,3 +48,8 @@ export interface IOpenWeatherResponse {
   name: string;
   cod: number;
 }
+
+export interface ISelectedCityContextType {
+  selectedCity: IOpenWeatherResponse;
+  setSelectedCity: React.Dispatch<React.SetStateAction<IOpenWeatherResponse>>;
+}

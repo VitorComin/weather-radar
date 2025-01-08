@@ -1,0 +1,22 @@
+{
+  "home": "Início",
+  "about": "Sobre",
+  "city_request_error": "Erro ao buscar as cidades:",
+  "back": "Voltar",
+  "weather": "Clima:",
+  "weather_description": "Descrição do clima:",
+  "country_flag": "Bandeira do País",
+  "temperature": "Temperatura:",
+  "feels_like": "Sensação Térmica:",
+  "minimum_temperature": "Temperatura Mínima:",
+  "maximum_temperature": "Temperatura Máxima:",
+  "atmospheric_pressure": "Pressão Atmosférica:",
+  "humidity": "Umidade:",
+  "wind_speed": "Velocidade do Vento:",
+  "wind_direction": "Direção do Vento:",
+  "cloud_coverage_percentage": "Porcentagem coberta por nuvens:",
+  "updated_at": "Atualizado em:",
+  "no_options": "Sem opções",
+  "search_a_city": "Pesquise uma cidade",
+  "use_selected_city_error": "useSelectedCity deve ser usado dentro de um SelectedCityProvider"
+}
