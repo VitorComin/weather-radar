@@ -1,24 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { Space, Select, Typography, Col, Row, Button } from "antd";
 import { debounce } from "lodash";
-import axios from "axios";
 import { ArrowBackIcon, ThunderstormIcon } from "../../assets/icons/Icons";
 import { IOpenWeatherResponse } from "../../types/types";
 import ReactAnimatedWeather from "react-animated-weather";
 import { resetPageStyle } from "../../utils/resetPageLayout";
 import { useTranslation } from "react-i18next";
 import { useSelectedCity } from "../../contexts/SelectedCityContext";
+import { getCities } from "../../services/OpenWeatherApi";
 
 const { Option } = Select;
 
 const HomePage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { selectedCity, setSelectedCity } = useSelectedCity();
   const [cityOptions, setCityOptions] = useState<IOpenWeatherResponse[]>([]);
   const [visibleContent, setVisibleContent] = useState<string | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const RenderIcon = ({ id }: { id: number }) => {
+  const currentLanguageIsPortuguese = i18n.language === "pt";
+  const temperatureMetric = currentLanguageIsPortuguese ? "°C" : "°F";
+  const selectedCityCountry = selectedCity?.sys?.country;
+
+  useEffect(() => {
+    const hasSelectedCity =
+      selectedCity && Object.keys(selectedCity)?.length > 0;
+
+    setTimeout(() => setVisibleContent("visible"), 100);
+
+    if (hasSelectedCity) {
+      document.documentElement.classList.add("daytime");
+    }
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => setVisibleContent("visible"), 100);
+  }, [selectedCity]);
+
+  function RenderIcon({ id }: { id: number }) {
     if (id >= 200 && id <= 232) {
       return <ThunderstormIcon />;
     } else {
@@ -31,7 +50,7 @@ const HomePage: React.FC = () => {
         />
       );
     }
-  };
+  }
 
   function getWeatherIcon(id: number) {
     if (id >= 200 && id <= 232) return "RAIN";
@@ -57,36 +76,19 @@ const HomePage: React.FC = () => {
     return "white";
   }
 
-  useEffect(() => {
-    const hasSelectedCity =
-      selectedCity && Object.keys(selectedCity)?.length > 0;
-
-    setTimeout(() => setVisibleContent("visible"), 0);
-    if (hasSelectedCity) {
-      document.documentElement.classList.add("daytime");
-    }
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => setVisibleContent("visible"), 0);
-  }, [selectedCity]);
-
-  const handleSearch = async (value: string) => {
+  async function handleSearch(value: string) {
     if (!value || value.length < 2) return;
 
     setLoading(true);
     try {
-      const { data } = await axios.get(
-        `http://api.openweathermap.org/data/2.5/find?q=${value}&units=metric&appid=b6432528466c2ddd5717e9a9ae56b0f9&lang=pt`
-      );
-
+      const { data } = await getCities(value, currentLanguageIsPortuguese);
       setCityOptions(data.list);
     } catch (error) {
       console.error(t("city_request_error"), error);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   function onSelectCity(cityId: number) {
     setVisibleContent(undefined);
@@ -136,50 +138,47 @@ const HomePage: React.FC = () => {
             <RenderIcon id={selectedCity?.weather[0]?.id} />
 
             <Typography.Text>
-              <strong>{t("weather")}</strong> {selectedCity?.weather[0]?.main}
+              <strong>{t("weather")}</strong>{" "}
+              {t(selectedCity?.weather[0]?.main)}
             </Typography.Text>
 
             <Typography.Text>
               <strong>{t("weather_description")}</strong>{" "}
-              {selectedCity?.weather[0]?.description
-                ? selectedCity.weather[0].description.charAt(0).toUpperCase() +
-                  selectedCity.weather[0].description.slice(1)
-                : ""}
+              {t(`${selectedCity?.weather[0]?.id}`)}
             </Typography.Text>
           </div>
           <div className="home-information-section">
             <Row className="city-title-container">
               <img
                 src={`https://flagcdn.com/w80/${
-                  selectedCity?.sys?.country.toLowerCase() || "br"
+                  selectedCityCountry.toLowerCase() || "br"
                 }.png`}
                 alt={t("country_flag")}
-                style={{ marginRight: 20 }}
               />
-              <Typography.Title
-                style={{ justifyContent: "center", display: "flex" }}
-                level={1}
-              >
-                {selectedCity?.name} - {selectedCity?.sys?.country}
+              <Typography.Title level={1}>
+                {selectedCity?.name} - {selectedCityCountry}
               </Typography.Title>
             </Row>
             <Row className={"weather-informations-container"}>
               <Col sm={24} md={12}>
                 <Typography.Text>
                   <strong>{t("temperature")}</strong> {selectedCity?.main?.temp}
-                  °C
+                  {temperatureMetric}
                 </Typography.Text>
                 <Typography.Text>
                   <strong>{t("feels_like")}</strong>{" "}
-                  {selectedCity?.main?.feels_like}°C
+                  {selectedCity?.main?.feels_like}
+                  {temperatureMetric}
                 </Typography.Text>
                 <Typography.Text>
                   <strong>{t("minimum_temperature")}</strong>{" "}
-                  {selectedCity?.main?.temp_min}°C
+                  {selectedCity?.main?.temp_min}
+                  {temperatureMetric}
                 </Typography.Text>
                 <Typography.Text>
                   <strong>{t("maximum_temperature")}</strong>{" "}
-                  {selectedCity?.main?.temp_max}°C
+                  {selectedCity?.main?.temp_max}
+                  {temperatureMetric}
                 </Typography.Text>
                 <Typography.Text>
                   <strong>{t("atmospheric_pressure")}</strong>{" "}
@@ -205,7 +204,9 @@ const HomePage: React.FC = () => {
                 </Typography.Text>
                 <Typography.Text>
                   <strong>{t("updated_at")}</strong>{" "}
-                  {new Date(selectedCity?.dt * 1000).toLocaleString("pt-BR")}
+                  {new Date(selectedCity?.dt * 1000).toLocaleString(
+                    i18n.language
+                  )}
                 </Typography.Text>
               </Col>
             </Row>
@@ -226,8 +227,8 @@ const HomePage: React.FC = () => {
           onDropdownVisibleChange={clearOptionsOnSelectDropdownClose}
         >
           {cityOptions?.map((city) => (
-            <Option key={city.id} value={city.id}>
-              {city.name}, {city.sys.country}
+            <Option key={city?.id} value={city?.id}>
+              {city?.name}, {city?.sys?.country}
             </Option>
           ))}
         </Select>

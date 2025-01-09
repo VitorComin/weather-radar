@@ -15,7 +15,9 @@ const LayoutHeader: React.FC = () => {
 
   return (
     <Header className="layout-header-container">
-      <Typography.Title>Weather Radar</Typography.Title>
+      <Typography.Title className={"site-title"}>
+        Weather Radar
+      </Typography.Title>
       <div className={"header-links-container"}>
         <Link to="/">{t("home")}</Link>
         <Link onClick={resetPageStyle} to="/about">
