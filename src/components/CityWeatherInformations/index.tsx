@@ -12,14 +12,14 @@ const CityWeatherInformations: React.FC<ICityWeatherInformations> = ({
   const temperatureMetric = currentLanguageIsPortuguese ? "°C" : "°F";
   const selectedCityCountry = selectedCity?.sys?.country;
 
-  function RenderIcon({ id }: { id: number }) {
-    if (id >= 200 && id <= 232) {
+  function RenderIcon({ weatherId }: { weatherId: number }) {
+    if (weatherId >= 200 && weatherId <= 232) {
       return <ThunderstormIcon />;
     } else {
       return (
         <ReactAnimatedWeather
-          icon={getWeatherIcon(id)}
-          color={getWeatherIconColor(id)}
+          icon={getWeatherIcon(weatherId)}
+          color={getWeatherIconColor(weatherId)}
           size={128}
           animate={true}
         />
@@ -27,15 +27,15 @@ const CityWeatherInformations: React.FC<ICityWeatherInformations> = ({
     }
   }
 
-  function getWeatherIcon(id: number) {
-    if (id >= 200 && id <= 232) return "RAIN";
-    if (id >= 300 && id <= 321) return "RAIN";
-    if (id >= 500 && id <= 531) return "RAIN";
-    if (id >= 600 && id <= 622) return "SNOW";
-    if (id === 800) return "CLEAR_DAY";
-    if (id === 801) return "PARTLY_CLOUDY_DAY";
-    if (id >= 802 && id <= 804) return "CLOUDY";
-    if (id >= 701 && id <= 781) return "FOG";
+  function getWeatherIcon(weatherId: number) {
+    if (weatherId >= 200 && weatherId <= 232) return "RAIN";
+    if (weatherId >= 300 && weatherId <= 321) return "RAIN";
+    if (weatherId >= 500 && weatherId <= 531) return "RAIN";
+    if (weatherId >= 600 && weatherId <= 622) return "SNOW";
+    if (weatherId === 800) return "CLEAR_DAY";
+    if (weatherId === 801) return "PARTLY_CLOUDY_DAY";
+    if (weatherId >= 802 && weatherId <= 804) return "CLOUDY";
+    if (weatherId >= 701 && weatherId <= 781) return "FOG";
     return "CLOUDY";
   }
 
@@ -53,7 +53,7 @@ const CityWeatherInformations: React.FC<ICityWeatherInformations> = ({
   return (
     <>
       <div className="home-information-section">
-        <RenderIcon id={selectedCity?.weather[0]?.id} />
+        <RenderIcon weatherId={selectedCity?.weather[0]?.id} />
         <Typography.Text>
           <strong>{t("weather")}</strong> {t(selectedCity?.weather[0]?.main)}
         </Typography.Text>

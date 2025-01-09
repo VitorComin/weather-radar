@@ -1,6 +1,10 @@
 import { Space, Typography } from "antd";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import {
+  backgroundStarsTemplateVideoLink,
+  openWeatherAPILink,
+} from "../../utils/Links";
 
 const AboutPage: React.FC = () => {
   const { t } = useTranslation();
@@ -33,12 +37,15 @@ const AboutPage: React.FC = () => {
         {t("project_stack")}
         <br />
         <br />
-        <Typography.Link href="https://www.youtube.com/watch?v=aywzn9cf-_U">
+        <Typography.Link
+          href={backgroundStarsTemplateVideoLink}
+          target="_blank"
+        >
           {t("stars_template")}
         </Typography.Link>
         <br />
         <br />
-        <Typography.Link href="https://openweathermap.org/api">
+        <Typography.Link href={openWeatherAPILink} target="_blank">
           OpenWeatherAPI
         </Typography.Link>
       </Typography.Paragraph>

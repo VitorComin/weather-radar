@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import LayoutHeader from "./components/LayoutHeader";
 import LayoutContent from "./components/LayoutContent";
 import BackgroundStars from "./components/BackgroundStars";

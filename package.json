@@ -2,6 +2,7 @@
   "name": "stock-comparator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vitorcomin.github.io/weather-radar",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -37,7 +38,8 @@
     "build": "craco build",
     "test": "craco test",
     "compile-theme": "lessc src/styles/App.less | postcss --use cssnano -o public/App.css",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
