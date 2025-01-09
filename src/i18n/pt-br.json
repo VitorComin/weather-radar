@@ -87,5 +87,12 @@
   "Sand": "Areia",
   "Ash": "Cinzas",
   "Squall": "Rajada",
-  "Tornado": "Tornado"
+  "Tornado": "Tornado",
+  "stars_template": "Template usado para as estrelas do fundo",
+  "simple_project_description": "Este é um simples projeto pessoal desenvolvido para demonstrar a base de algumas das minhas habilidades no Front-End.",
+  "project_weather_api": "Neste projeto, é possível, utilizando a API pública da OpenWeatherAPI, obter informações sobre as condições climáticas de uma grande variedade de cidades ao redor do mundo, com dados atualizados.",
+  "css_skills_description": "Sobre as habilidades apresentadas, ao acessar o projeto no navegador, é possível observar habilidades básicas de CSS, como transições de opacidade e cor de fundo, por exemplo, sincronizadas com as ações realizadas pelo usuário. Além disso, o projeto é responsivo, podendo ser acessado em diferentes dispositivos, como desktop, celular e tablet.",
+  "react_code_organization": "Ao analisar o código do projeto, é possível compreender como organizo um projeto React, com responsabilidades bem separadas em pastas de utils, services, components e pages, por exemplo, além do uso de componentização para manter os arquivos com código enxuto. A legibilidade de código é um ponto indispensável no meu desenvolvimento, aplicando conceitos aprendidos no livro O Código Limpo.",
+  "jest_tests_info": "O projeto também possui testes automatizados em Jest, habilidade desenvolvida por meio de cursos, com certificado disponível no meu LinkedIn, e aprimorada ao longo da minha carreira profissional.",
+  "project_stack": "Projeto desenvolvido utilizando React com TypeScript, além da biblioteca de componentes ANTD e outras bibliotecas, como React Router e I18n."
 }

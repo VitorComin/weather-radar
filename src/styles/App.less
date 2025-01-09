@@ -3,7 +3,8 @@
 @import "./BackgroundStars.less";
 @import "./Header.less";
 
-@text-color: #faf9f6;
+@text-light-color: #f8f8f8;
+@text-dark-color: #262626;
 
 html {
   background-color: #1b2735;
@@ -19,15 +20,17 @@ html.daytime {
 
   .ant-typography-title,
   .ant-typography-paragraph,
-  .ant-typography,
-  a {
-    color: #262626 !important;
+  .ant-layout-header.ant-typography,
+  .home-page-container.ant-typography,
+  .header-link,
+  .site-title {
+    color: @text-dark-color !important;
   }
 
   .go-back-button {
-    color: #262626 !important;
+    color: @text-dark-color !important;
     svg {
-      fill: #262626 !important;
+      fill: @text-dark-color !important;
     }
   }
 }
@@ -58,9 +61,11 @@ body {
 
 .ant-typography-title,
 .ant-typography-paragraph,
-.ant-typography,
-a {
-  color: #f8f8f8 !important;
+.ant-layout-header.ant-typography,
+.home-page-container.ant-typography,
+.header-link,
+.site-title {
+  color: @text-light-color !important;
   transition: color 1.5s ease;
 }
 
@@ -70,7 +75,7 @@ span.ant-typography {
   margin-bottom: 0.5em;
 }
 
-a {
+.header-link {
   font-size: 18px !important;
 }
 

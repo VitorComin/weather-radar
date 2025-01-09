@@ -1,3 +1,5 @@
+import { SelectProps } from "antd";
+
 export interface IOpenWeatherResponse {
   coord: {
     lon: number;
@@ -51,5 +53,21 @@ export interface IOpenWeatherResponse {
 
 export interface ISelectedCityContextType {
   selectedCity: IOpenWeatherResponse;
+  setSelectedCity: React.Dispatch<React.SetStateAction<IOpenWeatherResponse>>;
+}
+
+export interface ICitySelect extends SelectProps {
+  currentLanguageIsPortuguese: boolean;
+  setVisibleContent: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setSelectedCity: React.Dispatch<React.SetStateAction<IOpenWeatherResponse>>;
+}
+
+export interface ICityWeatherInformations {
+  selectedCity: IOpenWeatherResponse;
+  currentLanguageIsPortuguese: boolean;
+}
+
+export interface IGoBackHomeButton {
+  setVisibleContent: React.Dispatch<React.SetStateAction<string | undefined>>;
   setSelectedCity: React.Dispatch<React.SetStateAction<IOpenWeatherResponse>>;
 }

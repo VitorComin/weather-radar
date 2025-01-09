@@ -19,15 +19,17 @@ const LayoutHeader: React.FC = () => {
         Weather Radar
       </Typography.Title>
       <div className={"header-links-container"}>
-        <Link to="/">{t("home")}</Link>
-        <Link onClick={resetPageStyle} to="/about">
+        <Link className={"header-link"} to="/">
+          {t("home")}
+        </Link>
+        <Link className={"header-link"} onClick={resetPageStyle} to="/about">
           {t("about")}
         </Link>
 
-        <a onClick={() => changePageLanguage("pt")}>
+        <a className={"header-link"} onClick={() => changePageLanguage("pt")}>
           <Flag country="BR" />
         </a>
-        <a onClick={() => changePageLanguage("en")}>
+        <a className={"header-link"} onClick={() => changePageLanguage("en")}>
           <Flag country="US" />
         </a>
       </div>
