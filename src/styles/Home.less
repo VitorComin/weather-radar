@@ -61,7 +61,14 @@
   left: 25px;
   top: 9vh;
   border: none;
-  font-size: 18;
+  font-size: 18px;
+  display: flex !important;
+  justify-content: center;
+}
+
+.go-back-button svg {
+  position: relative;
+  top: 3px;
 }
 
 .weather-informations-container {
@@ -123,6 +130,12 @@
       display: flex;
       width: 100%;
       flex-direction: column;
+
+      .ant-typography {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 
