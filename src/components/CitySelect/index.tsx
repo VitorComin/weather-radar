@@ -23,7 +23,10 @@ const CitySelect: React.FC<ICitySelect> = ({
 
     setLoading(true);
     try {
-      const { data } = await getCities(value, currentLanguageIsPortuguese);
+      const { data } = await getCities(
+        value?.toLowerCase(),
+        currentLanguageIsPortuguese
+      );
       setCityOptions(data?.list);
     } catch (error) {
       console.error(t("city_request_error"), error);
