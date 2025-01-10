@@ -6,10 +6,8 @@ import { ICityWeatherInformations } from "../../types/types";
 
 const CityWeatherInformations: React.FC<ICityWeatherInformations> = ({
   selectedCity,
-  currentLanguageIsPortuguese,
 }) => {
   const { t, i18n } = useTranslation();
-  const temperatureMetric = currentLanguageIsPortuguese ? "°C" : "°F";
   const selectedCityCountry = selectedCity?.sys?.country;
 
   function RenderIcon({ weatherId }: { weatherId: number }) {
@@ -79,22 +77,22 @@ const CityWeatherInformations: React.FC<ICityWeatherInformations> = ({
           <Col sm={24} md={12}>
             <Typography.Text>
               <strong>{t("temperature")}</strong> {selectedCity?.main?.temp}
-              {temperatureMetric}
+              {"°C"}
             </Typography.Text>
             <Typography.Text>
               <strong>{t("feels_like")}</strong>{" "}
               {selectedCity?.main?.feels_like}
-              {temperatureMetric}
+              {"°C"}
             </Typography.Text>
             <Typography.Text>
               <strong>{t("minimum_temperature")}</strong>{" "}
               {selectedCity?.main?.temp_min}
-              {temperatureMetric}
+              {"°C"}
             </Typography.Text>
             <Typography.Text>
               <strong>{t("maximum_temperature")}</strong>{" "}
               {selectedCity?.main?.temp_max}
-              {temperatureMetric}
+              {"°C"}
             </Typography.Text>
             <Typography.Text>
               <strong>{t("atmospheric_pressure")}</strong>{" "}

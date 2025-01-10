@@ -9,7 +9,6 @@ import { setBrighterPageLayout } from "../../utils/setBrighterPageLayout";
 const { Option } = Select;
 
 const CitySelect: React.FC<ICitySelect> = ({
-  currentLanguageIsPortuguese,
   setVisibleContent,
   setSelectedCity,
   ...props
@@ -23,10 +22,7 @@ const CitySelect: React.FC<ICitySelect> = ({
 
     setLoading(true);
     try {
-      const { data } = await getCities(
-        value?.toLowerCase(),
-        currentLanguageIsPortuguese
-      );
+      const { data } = await getCities(value?.toLowerCase());
       setCityOptions(data?.list);
     } catch (error) {
       console.error(t("city_request_error"), error);

@@ -57,14 +57,12 @@ export interface ISelectedCityContextType {
 }
 
 export interface ICitySelect extends SelectProps {
-  currentLanguageIsPortuguese: boolean;
   setVisibleContent: React.Dispatch<React.SetStateAction<string | undefined>>;
   setSelectedCity: React.Dispatch<React.SetStateAction<IOpenWeatherResponse>>;
 }
 
 export interface ICityWeatherInformations {
   selectedCity: IOpenWeatherResponse;
-  currentLanguageIsPortuguese: boolean;
 }
 
 export interface IGoBackHomeButton {
