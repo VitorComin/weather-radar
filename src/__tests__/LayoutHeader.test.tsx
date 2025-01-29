@@ -1,23 +1,14 @@
 import { screen, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import renderWithI18n from "./utils/renderWithI18n";
 import LayoutHeader from "../components/LayoutHeader";
 import i18n from "../i18n";
 import { resetPageStyle } from "../utils/resetPageLayout";
+import { renderWithMemoryRouter } from "./utils/renderWithRouter";
 
 jest.mock("../utils/resetPageLayout", () => ({ resetPageStyle: jest.fn() }));
 
-function renderWithMemoryRouter() {
-  renderWithI18n(
-    <MemoryRouter>
-      <LayoutHeader />
-    </MemoryRouter>
-  );
-}
-
 describe("<LayoutHeader />", () => {
   test("it should render four anchors", () => {
-    renderWithMemoryRouter();
+    renderWithMemoryRouter(<LayoutHeader />);
 
     const links = screen.getAllByRole("link");
 
@@ -25,7 +16,7 @@ describe("<LayoutHeader />", () => {
   });
 
   test("it should changes language to pt-br when clicking BR flag", () => {
-    renderWithMemoryRouter();
+    renderWithMemoryRouter(<LayoutHeader />);
 
     const brFlag = screen.getByRole("link", { name: /br/i });
     fireEvent.click(brFlag);
@@ -34,7 +25,7 @@ describe("<LayoutHeader />", () => {
   });
 
   test("it should changes language to en when clicking US flag", () => {
-    renderWithMemoryRouter();
+    renderWithMemoryRouter(<LayoutHeader />);
 
     const usFlag = screen.getByRole("link", { name: /us/i });
     fireEvent.click(usFlag);
@@ -43,7 +34,7 @@ describe("<LayoutHeader />", () => {
   });
 
   test("it should call resetPageStyle mock when clicking on about link", () => {
-    renderWithMemoryRouter();
+    renderWithMemoryRouter(<LayoutHeader />);
 
     const aboutLink = screen.getByRole("link", { name: /about/i });
     fireEvent.click(aboutLink);
