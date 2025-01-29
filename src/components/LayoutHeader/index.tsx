@@ -26,10 +26,24 @@ const LayoutHeader: React.FC = () => {
           {t("about")}
         </Link>
 
-        <a className={"header-link"} onClick={() => changePageLanguage("pt")}>
+        <a
+          href="/"
+          className={"header-link"}
+          onClick={(event) => {
+            event.preventDefault();
+            changePageLanguage("pt");
+          }}
+        >
           <Flag country="BR" />
         </a>
-        <a className={"header-link"} onClick={() => changePageLanguage("en")}>
+        <a
+          href="/"
+          className={"header-link"}
+          onClick={(event) => {
+            event.preventDefault();
+            changePageLanguage("en");
+          }}
+        >
           <Flag country="US" />
         </a>
       </div>
