@@ -1,4 +1,4 @@
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 import { ICitySelect, IOpenWeatherResponse } from "../../types/types";
 import { useState } from "react";
@@ -65,11 +65,17 @@ const CitySelect: React.FC<ICitySelect> = ({
       onDropdownVisibleChange={clearOptionsOnSelectDropdownClose}
       {...props}
     >
-      {cityOptions?.map((city) => (
-        <Option key={city?.id} value={city?.id}>
-          {city?.name}, {city?.sys?.country}
+      {loading ? (
+        <Option disabled>
+          <Spin className={'city-select-spin'} />
         </Option>
-      ))}
+      ) : (
+        cityOptions?.map(city => (
+          <Option key={city?.id} value={city?.id}>
+            {city?.name}, {city?.sys?.country}
+          </Option>
+        ))
+      )}
     </Select>
   );
 };
