@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import CitySelect from "../components/CitySelect";
-import renderWithI18n from "./utils/renderWithI18n";
+import renderWithI18n from "../utils/renderWithI18n";
 import user from "@testing-library/user-event";
 
 jest.mock("../services/OpenWeatherApi", () => ({

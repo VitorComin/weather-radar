@@ -1,6 +1,6 @@
 import { screen, waitFor } from "@testing-library/react";
 import GoBackHomeButton from "../components/GoBackHomeButton";
-import renderWithI18n from "./utils/renderWithI18n";
+import renderWithI18n from "../utils/renderWithI18n";
 import user from "@testing-library/user-event";
 
 describe("<GoBackHomeButton />", () => {

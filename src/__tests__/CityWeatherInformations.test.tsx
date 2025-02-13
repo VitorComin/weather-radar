@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { IOpenWeatherResponse } from "../types/types";
 import CityWeatherInformations from "../components/CityWeatherInformations";
-import renderWithI18n from "./utils/renderWithI18n";
+import renderWithI18n from "../utils/renderWithI18n";
 
 jest.mock("react-animated-weather", () => () => (
   <div data-testid="mocked-weather-icon" />

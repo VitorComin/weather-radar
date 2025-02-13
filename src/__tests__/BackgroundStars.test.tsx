@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import BackgroundStars from "../components/BackgroundStars";
-import renderWithI18n from "./utils/renderWithI18n";
+import renderWithI18n from "../utils/renderWithI18n";
 
 describe("<BackgroundStars />", () => {
   test("should render three divs with correct IDs", () => {

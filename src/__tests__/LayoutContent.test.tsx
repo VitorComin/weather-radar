@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import LayoutContent from "../components/LayoutContent";
-import { renderWithMemoryRouter } from "./utils/renderWithRouter";
 import { SelectedCityProvider } from "../contexts/SelectedCityContext";
+import { renderWithMemoryRouter } from "../utils/renderWithRouter";
 
 jest.mock("../services/OpenWeatherApi", () => ({
   getCities: jest.fn(),

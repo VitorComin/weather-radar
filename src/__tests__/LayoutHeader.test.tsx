@@ -2,7 +2,7 @@ import { screen, fireEvent } from "@testing-library/react";
 import LayoutHeader from "../components/LayoutHeader";
 import i18n from "../i18n";
 import { resetPageStyle } from "../utils/resetPageLayout";
-import { renderWithMemoryRouter } from "./utils/renderWithRouter";
+import { renderWithMemoryRouter } from "../utils/renderWithRouter";
 
 jest.mock("../utils/resetPageLayout", () => ({ resetPageStyle: jest.fn() }));
 
